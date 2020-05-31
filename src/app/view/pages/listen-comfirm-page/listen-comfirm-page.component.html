@@ -10,24 +10,28 @@
 <div class="container my-4">
     <p>Nghe lại các đoạn ghi âm và đổi lại kết quả đánh giá nếu cần thiết.</p>
     <div class="row">
-        <div class="col-md-6 px-4 py-2">
+        <div *ngFor="let item of validationRequests; let i = index" class="col-md-6 px-4 py-2">
             <div class="d-flex justify-content-between align-items-center mx-auto p-2 border">
-                <p class="my-auto">Không <i class="fas fa-check"></i></p>
+                <p class="my-auto">{{ item.label }}
+                    <i *ngIf="item.validation" class="fas fa-check"></i>
+                    <i *ngIf="!item.validation" class="fas fa-times"></i>
+                </p>
                 <div>
-                    <button type="button" class="btn btn-primary rounded-circle m-2"
+                    <button type="button" class="btn btn-primary rounded-circle m-2" (click)="playback(i)"
                         style="width: 2.5rem; height: 2.5rem;">
                         <i class="fas fa-play"></i>
                     </button>
-                    <button type="button" class="btn btn-primary rounded-circle m-2"
+                    <button type="button" class="btn btn-primary rounded-circle m-2" (click)="changeValidation(i)"
                         style="width: 2.5rem; height: 2.5rem;">
-                        <i class="fas fa-times"></i>
+                        <i *ngIf="!item.validation" class="fas fa-check"></i>
+                        <i *ngIf="item.validation" class="fas fa-times"></i>
                     </button>
                 </div>
             </div>
         </div>
 
         <div class="col-12">
-            <button type="button" class="btn btn-lg btn-primary mt-4 mx-auto d-block" routerLink="/thank">
+            <button type="button" class="btn btn-lg btn-primary mt-4 mx-auto d-block" (click)="submitValidations()" routerLink="/thank">
                 Gửi kết quả xác nhận
             </button>
         </div>

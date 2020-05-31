@@ -39,7 +39,7 @@ export class SpeakPageComponent {
     }
     let sound = new Howl({
       src: [this.currentRecording],
-      ext: ['wav']
+      format: ['wav']
     });
     sound.play();
   }
