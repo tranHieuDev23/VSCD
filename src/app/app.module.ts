@@ -9,6 +9,7 @@ import { ListenPageComponent } from './view/pages/listen-page/listen-page.compon
 import { ListenComfirmPageComponent } from './view/pages/listen-comfirm-page/listen-comfirm-page.component';
 import { ThankPageComponent } from './view/pages/thank-page/thank-page.component';
 import { SpeakComfirmPageComponent } from './view/pages/speak-comfirm-page/speak-comfirm-page.component';
+import { BackButtonComponent } from './view/components/back-button/back-button.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { SpeakComfirmPageComponent } from './view/pages/speak-comfirm-page/speak
     ListenPageComponent,
     ListenComfirmPageComponent,
     ThankPageComponent,
-    SpeakComfirmPageComponent
+    SpeakComfirmPageComponent,
+    BackButtonComponent
   ],
   imports: [
     BrowserModule,
