@@ -3,6 +3,9 @@
         <a class="nav-link active" routerLink="/">
             <i class="fas fa-arrow-left"></i>
         </a>
+        <span class="nav-link">
+            Xác nhận các bản ghi âm
+        </span>
     </nav>
 </div>
 
@@ -20,16 +23,21 @@
             </div>
         </div>
         <div class="col-md-6 d-flex flex-column justify-content-center py-4">
-            <button type="button" class="btn btn-primary rounded-circle shadow m-2 mx-auto" style="width: 4rem; height: 4rem;">
+            <button type="button" class="btn btn-primary rounded-circle shadow m-2 mx-auto"
+                style="width: 4rem; height: 4rem;">
                 <i class="fas fa-play"></i>
             </button>
             <div class="mx-auto">
-                <button type="button" class="btn btn-primary rounded-circle shadow m-2" style="width: 4rem; height: 4rem;">
+                <button type="button" class="btn btn-primary rounded-circle shadow m-2"
+                    style="width: 4rem; height: 4rem;">
                     <i class="fas fa-check"></i>
                 </button>
-                <button type="button" class="btn btn-primary rounded-circle shadow m-2" style="width: 4rem; height: 4rem;">
-                    <i class="fas fa-times"></i>
-                </button>
+                <a routerLink="/listen-confirm">
+                    <button type="button" class="btn btn-primary rounded-circle shadow m-2"
+                        style="width: 4rem; height: 4rem;">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </a>
             </div>
         </div>
     </div>
