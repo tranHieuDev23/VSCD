@@ -1,1 +1,34 @@
-<p>home-page works!</p>
+<div class="container-fluid" id="header">
+    <div class="jumbotron py-3 py-md-4">
+        <h1 class="h1">Vietnamese Speech Command Dataset</h1>
+        <p class="lead">Bộ dữ liệu lệnh tiếng nói bằng tiếng Việt.</p>
+        <p>Lấy ý tưởng từ bộ dữ liệu <a
+                href="https://ai.googleblog.com/2017/08/launching-speech-commands-dataset.html">Google Speech Command
+                Dataset</a>, dự án này hướng tới việc xây dựng một bộ dữ liệu giọng nói ngắn gọn, thích hợp cho các ứng
+            dụng nhận diện lệnh đơn giản trong thời gian thực.</p>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 d-flex flex-column justify-content-center py-4">
+            <div class="mx-auto h3">Nói</div>
+            <p class="mx-auto lead text-center">Đóng góp giọng nói của bạn</p>
+            <a routerLink="/speak" class="mx-auto">
+                <button type="button" class="btn btn-lg btn-primary rounded-circle shadow" id="speak"
+                    style="width: 4rem; height: 4rem;">
+                    <i class="fas fa-microphone"></i>
+                </button>
+            </a>
+        </div>
+        <div class="col-md-6 d-flex flex-column justify-content-center py-4">
+            <div class="mx-auto h3">Nghe</div>
+            <p class="mx-auto lead text-center">Giúp chúng tôi xác thực các bản ghi âm</p>
+            <a routerLink="/listen" class="mx-auto">
+                <button type="button" class="btn btn-lg btn-primary rounded-circle shadow" id="listen"
+                    style="width: 4rem; height: 4rem;">
+                    <i class="fas fa-headphones"></i>
+                </button>
+            </a>
+        </div>
+    </div>
+</div>

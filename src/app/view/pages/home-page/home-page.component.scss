@@ -1,0 +1,42 @@
+#header {
+  background: #9c100f;
+  color: white;
+
+  a {
+    text-decoration: underline;
+    color: white;
+  }
+}
+
+button {
+  background-color: white;
+  border: none;
+}
+
+#speak {
+  i {
+    color: #ef5350;
+  }
+
+  &:focus,
+  &:hover {
+    background-color: #ef5350;
+    i {
+      color: white;
+    }
+  }
+}
+
+#listen {
+  i {
+    color: #4caf50;
+  }
+
+  &:focus,
+  &:hover {
+    background-color: #4caf50;
+    i {
+      color: white;
+    }
+  }
+}
