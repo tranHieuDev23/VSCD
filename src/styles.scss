@@ -10,12 +10,15 @@
 @import "~bootstrap/scss/_card.scss";
 @import "~@fortawesome/fontawesome-free/css/all.min.css";
 
+a, a:focus, a:hover {
+  text-decoration: none;
+}
+
 .header {
   background: #9c100f;
   color: white;
 
   a {
-    text-decoration: underline;
     color: white;
   }
 }
