@@ -28,8 +28,9 @@ export class SpeakPageComponent {
   public startRecording(): void {
     this.recordService.recordAudio(2000).then((result) => {
       this.currentRecording = result;
+      console.log("Something");
     }, (reason) => {
-
+      console.log(reason);
     });
   }
 

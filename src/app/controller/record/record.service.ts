@@ -32,12 +32,11 @@ export class RecordService {
     return new Promise((resolve, reject) => {
       this.isRecording = true;
       this.getRecorder().then((recorder) => {
-        recorder.reset();
         recorder.setRecordingDuration(duration, () => {
-          recorder.getDataURL((dataUrl: any) => {
-            this.isRecording = false;
-            resolve(dataUrl);
-          });
+          this.isRecording = false;
+          let blob = recorder.getBlob();
+          recorder.reset();
+          resolve(blob);
         });
         recorder.startRecording();
       }, (error) => {

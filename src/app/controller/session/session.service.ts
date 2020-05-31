@@ -2,16 +2,20 @@ import { Injectable } from '@angular/core';
 import * as hyperid from 'hyperid';
 import CLASSES from 'src/app/config/classes';
 import ValidationRequest from 'src/app/model/validation-request';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SessionService {
   private uuid: string;
-  private sessionRecordings: string[] = [];
+  private sessionRecordings: any[] = [];
+  private sessionRecordingUrls: string[] = [];
   private sessionValidationRequests: ValidationRequest[] = [];
 
-  constructor() {
+  constructor(
+    private http: HttpClient
+  ) {
     this.uuid = hyperid().uuid;
     this.resetSessionRecordings();
   }
@@ -26,14 +30,21 @@ export class SessionService {
 
   public setSessionRecording(id: number, data: any): void {
     this.sessionRecordings[id] = data;
+    this.sessionRecordingUrls[id] = URL.createObjectURL(data);
   }
 
-  public getSessionRecording(id: number): any {
-    return this.sessionRecordings[id];
+  public getSessionRecordingUrl(id: number): any {
+    return this.sessionRecordingUrls[id];
   }
 
   public submitSessionRecordings(): void {
-    console.log(this.sessionRecordings);
+    let formData = new FormData();
+    for (let i = 0; i < CLASSES.length; i++) {
+      let file = new File([this.sessionRecordings[i]], CLASSES[i] + '.wav', { type: 'video/webm' });
+      formData.append(CLASSES[i], file, CLASSES[i] + '.wav');
+    }
+    formData.append('uuid', this.getUuid());
+    this.http.post('/api/speak-submit', formData).subscribe();
   }
 
   public fetchValidationRequests(): Promise<void> {

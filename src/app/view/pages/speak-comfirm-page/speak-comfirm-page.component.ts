@@ -18,7 +18,7 @@ export class SpeakComfirmPageComponent {
   ) { }
 
   public playback(id: number): void {
-    let recording = this.sessionService.getSessionRecording(id);
+    let recording = this.sessionService.getSessionRecordingUrl(id);
     let sound = new Howl({
       src: [recording],
       ext: ['wav']

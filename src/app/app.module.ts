@@ -10,6 +10,7 @@ import { ListenComfirmPageComponent } from './view/pages/listen-comfirm-page/lis
 import { ThankPageComponent } from './view/pages/thank-page/thank-page.component';
 import { SpeakComfirmPageComponent } from './view/pages/speak-comfirm-page/speak-comfirm-page.component';
 import { BackButtonComponent } from './view/components/back-button/back-button.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { BackButtonComponent } from './view/components/back-button/back-button.c
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
