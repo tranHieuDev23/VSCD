@@ -5,4 +5,17 @@
 @import "~bootstrap/scss/_buttons.scss";
 @import "~bootstrap/scss/_utilities.scss";
 @import "~bootstrap/scss/_type.scss";
+@import "~bootstrap/scss/_nav.scss";
+@import "~bootstrap/scss/_navbar.scss";
+@import "~bootstrap/scss/_card.scss";
 @import "~@fortawesome/fontawesome-free/css/all.min.css";
+
+.header {
+  background: #9c100f;
+  color: white;
+
+  a {
+    text-decoration: underline;
+    color: white;
+  }
+}
