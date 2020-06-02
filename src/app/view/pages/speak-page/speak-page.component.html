@@ -19,8 +19,9 @@
                     </div>
                 </div>
             </div>
+            <h4 class="mx-auto mt-4" style="font-family: monospace;">00:{{ currentTime }}</h4>
         </div>
-        <div class="col-md-6 d-flex flex-column justify-content-center py-4">
+        <div class="col-md-6 d-flex flex-column justify-content-center py-3">
             <button type="button" class="btn btn-primary rounded-circle shadow m-2 mx-auto" style="width: 4rem; height: 4rem;" [disabled]="recordService.getIsRecording()" (click)="startRecording()">
                 <i class="fas fa-microphone"></i>
             </button>

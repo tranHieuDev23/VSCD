@@ -11,38 +11,62 @@ import { Router } from '@angular/router';
   styleUrls: ['./speak-page.component.scss']
 })
 export class SpeakPageComponent {
-  public currentClassId: number = 1;
-  public currentClassLabel: string;
   public classCount: number = CLASSES.length;
-  public currentRecording: any = null;
+
+  public currentClassId: number;
+  public currentClassLabel: string;
+  public currentRecording: any;
+  public currentRecordingUrl: string;
+  public currentTime: number;
 
   constructor(
     public recordService: RecordService,
     private sessionService: SessionService,
     private router: Router
   ) {
-    this.currentClassLabel = CLASSES[this.currentClassId - 1];
+    this.init(1);
     this.sessionService.resetSessionRecordings();
   }
 
+  private init(classId: number) {
+    this.currentClassId = classId;
+    this.currentClassLabel = CLASSES[classId - 1];
+    this.currentRecording = null;
+    this.currentRecordingUrl = null;
+    this.currentTime = 0;
+  }
+
   public startRecording(): void {
+    const timerTimeout = this.startTimer(2);
     this.recordService.recordAudio(2000).then((result) => {
       this.currentRecording = result;
-      console.log("Something");
+      this.currentRecordingUrl = URL.createObjectURL(result);
+      clearInterval(timerTimeout);
     }, (reason) => {
       console.log(reason);
     });
   }
 
   public playback(): void {
-    if (!this.currentRecording) {
+    if (!this.currentRecordingUrl) {
       return;
     }
     let sound = new Howl({
-      src: [this.currentRecording],
+      src: [this.currentRecordingUrl],
       format: ['wav']
     });
     sound.play();
+  }
+
+  private startTimer(duration: number): NodeJS.Timeout {
+    this.currentTime = 0;
+    return setInterval(() => {
+      if (this.currentTime < duration) {
+        this.currentTime ++;
+      } else {
+
+      }
+    }, 1000);
   }
 
   public next(): void {
@@ -51,9 +75,7 @@ export class SpeakPageComponent {
     }
     this.sessionService.setSessionRecording(this.currentClassId - 1, this.currentRecording);
     if (this.currentClassId < this.classCount) {
-      this.currentClassId++;
-      this.currentClassLabel = CLASSES[this.currentClassId - 1];
-      this.currentRecording = null;
+      this.init(this.currentClassId + 1);
     } else {
       this.router.navigateByUrl('/speak-confirm');
     }
