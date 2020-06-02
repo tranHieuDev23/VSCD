@@ -39,6 +39,7 @@ export class ListenComfirmPageComponent implements OnInit {
 
   public submitValidations(): void {
     this.sessionService.submitValidations().then((result) => {
+      this.sessionService.resetSessionValidationRequests();
       this.router.navigateByUrl("/thank");
     }, (error) => {
       console.log(error);

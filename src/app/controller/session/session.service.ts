@@ -28,6 +28,10 @@ export class SessionService {
     this.sessionRecordings = new Array(CLASSES.length);
   }
 
+  public resetSessionValidationRequests(): void {
+    this.sessionValidationRequests = [];
+  }
+
   public setSessionRecording(id: number, data: any): void {
     this.sessionRecordings[id] = data;
     this.sessionRecordingUrls[id] = URL.createObjectURL(data);
