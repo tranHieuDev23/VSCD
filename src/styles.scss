@@ -11,8 +11,30 @@
 @import "~bootstrap/scss/_alert.scss";
 @import "~@fortawesome/fontawesome-free/css/all.min.css";
 
-a, a:focus, a:hover {
+a,
+a:focus,
+a:hover {
   text-decoration: none;
+}
+
+button {
+  border: none !important;
+
+  &:focus,
+  &:hover {
+    background-color: white !important;
+    i {
+      color: #9c100f !important;
+    }
+  }
+
+  &:disabled,
+  &:disabled:hover {
+    background-color: #333333 !important;
+    i {
+      color: white !important;
+    }
+  }
 }
 
 .header {

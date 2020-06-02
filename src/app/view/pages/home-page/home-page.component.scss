@@ -1,6 +1,5 @@
 button {
   background-color: white;
-  border: none;
 }
 
 #speak {
@@ -10,9 +9,9 @@ button {
 
   &:focus,
   &:hover {
-    background-color: #ef5350;
+    background-color: #ef5350 !important;
     i {
-      color: white;
+      color: white !important;
     }
   }
 }
@@ -24,9 +23,9 @@ button {
 
   &:focus,
   &:hover {
-    background-color: #4caf50;
+    background-color: #4caf50 !important;
     i {
-      color: white;
+      color: white !important;
     }
   }
 }
