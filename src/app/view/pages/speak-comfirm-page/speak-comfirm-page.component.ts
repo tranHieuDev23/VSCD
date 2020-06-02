@@ -4,6 +4,7 @@ import { Howl } from 'howler';
 import CLASSES from 'src/app/config/classes';
 import { RecordService } from 'src/app/controller/record/record.service';
 import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-speak-comfirm-page',
@@ -12,6 +13,7 @@ import { Router } from '@angular/router';
 })
 export class SpeakComfirmPageComponent implements OnInit {
   public classLabels: string[] = CLASSES;
+  public errorMessage: string;
 
   constructor(
     public recordService: RecordService,
@@ -26,6 +28,7 @@ export class SpeakComfirmPageComponent implements OnInit {
         return;
       }
     }
+    this.errorMessage = null;
   }
 
   public playback(id: number): void {
@@ -41,7 +44,7 @@ export class SpeakComfirmPageComponent implements OnInit {
     this.recordService.recordAudio(2000).then((result) => {
       this.sessionService.setSessionRecording(id, result);
     }, (reason) => {
-
+      this.errorMessage = reason;
     });
   }
 
@@ -50,7 +53,11 @@ export class SpeakComfirmPageComponent implements OnInit {
       this.sessionService.resetSessionRecordings();
       this.router.navigateByUrl('/thank');
     }, (error) => {
-      console.log("Cannot submit recordings! " + error);
+      if (error instanceof HttpErrorResponse) {
+        this.errorMessage = error.message;
+      } else {
+        this.errorMessage = error;
+      }
     });
   }
 }

@@ -29,8 +29,11 @@
                 </div>
             </div>
         </div>
-
-        <div class="col-12">
+        
+        <div class="col-12 d-flex flex-column">
+            <div *ngIf="errorMessage" class="alert alert alert-danger mt-4 mt-md-4">
+                Có lỗi xảy ra trong quá trình gửi các kết quả xác nhận: {{ errorMessage }}
+            </div>
             <button type="button" class="btn btn-lg btn-primary mt-4 mx-auto d-block" (click)="submitValidations()">
                 Gửi kết quả xác nhận
             </button>

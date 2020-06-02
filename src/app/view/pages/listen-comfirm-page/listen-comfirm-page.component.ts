@@ -3,6 +3,7 @@ import { SessionService } from 'src/app/controller/session/session.service';
 import ValidationRequest from 'src/app/model/validation-request';
 import { Howl } from 'howler';
 import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-listen-comfirm-page',
@@ -11,6 +12,7 @@ import { Router } from '@angular/router';
 })
 export class ListenComfirmPageComponent implements OnInit {
   public validationRequests: ValidationRequest[] = [];
+  public errorMessage: string = null;
 
   constructor(
     private sessionService: SessionService,
@@ -40,9 +42,14 @@ export class ListenComfirmPageComponent implements OnInit {
   public submitValidations(): void {
     this.sessionService.submitValidations().then((result) => {
       this.sessionService.resetSessionValidationRequests();
+      this.errorMessage = null;
       this.router.navigateByUrl("/thank");
     }, (error) => {
-      console.log(error);
+      if (error instanceof HttpErrorResponse) {
+        this.errorMessage = error.message;
+      } else {
+        this.errorMessage = error;
+      }
     });
   }
 }

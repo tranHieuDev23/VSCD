@@ -18,6 +18,7 @@ export class SpeakPageComponent {
   public currentRecording: any;
   public currentRecordingUrl: string;
   public currentTime: number;
+  public errorMessage: string;
 
   constructor(
     public recordService: RecordService,
@@ -34,6 +35,7 @@ export class SpeakPageComponent {
     this.currentRecording = null;
     this.currentRecordingUrl = null;
     this.currentTime = 0;
+    this.errorMessage = null;
   }
 
   public startRecording(): void {
@@ -43,7 +45,7 @@ export class SpeakPageComponent {
       this.currentRecordingUrl = URL.createObjectURL(result);
       clearInterval(timerTimeout);
     }, (reason) => {
-      console.log(reason);
+      this.errorMessage = reason;
     });
   }
 
@@ -63,8 +65,6 @@ export class SpeakPageComponent {
     return setInterval(() => {
       if (this.currentTime < duration) {
         this.currentTime ++;
-      } else {
-
       }
     }, 1000);
   }

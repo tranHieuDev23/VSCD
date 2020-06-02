@@ -3,6 +3,7 @@ import { SessionService } from 'src/app/controller/session/session.service';
 import { Howl } from 'howler';
 import ValidationRequest from 'src/app/model/validation-request';
 import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-listen-page',
@@ -10,10 +11,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./listen-page.component.scss']
 })
 export class ListenPageComponent implements OnInit {
+  public requestsCount: number;
+
   public currentRequestId: number = 1;
   public currentRequest: ValidationRequest;
-  public requestsCount: number;
   public isRecordingPlayed: boolean = false;
+  public errorMessage: string;
 
   constructor(
     private sessionService: SessionService,
@@ -22,9 +25,29 @@ export class ListenPageComponent implements OnInit {
 
   public ngOnInit(): void {
     this.sessionService.fetchValidationRequests().then(async () => {
-      this.currentRequest = await this.sessionService.getValidationRequest(this.currentRequestId - 1);
       this.requestsCount = this.sessionService.getValidationRequestsCount();
+      this.init(1);
     }, (error) => {
+      if (error instanceof HttpErrorResponse) {
+        this.errorMessage = error.message;
+      } else {
+        this.errorMessage = error;
+      }
+    });
+  }
+
+  private init(requestId: number): void {
+    this.currentRequestId = requestId;
+    this.isRecordingPlayed = false;
+    this.errorMessage = null;
+    this.sessionService.getValidationRequest(requestId - 1).then((result) => {
+      this.currentRequest = result;
+    }, (error) => {
+      if (error instanceof HttpErrorResponse) {
+        this.errorMessage = error.message;
+      } else {
+        this.errorMessage = error;
+      }
     });
   }
 
@@ -41,9 +64,7 @@ export class ListenPageComponent implements OnInit {
   public async validate(validation: boolean) {
     this.currentRequest.result = validation;
     if (this.currentRequestId < this.requestsCount) {
-      this.currentRequestId ++;
-      this.currentRequest = await this.sessionService.getValidationRequest(this.currentRequestId - 1);
-      this.isRecordingPlayed = false;
+      this.init(this.currentRequestId + 1);
     } else {
       this.router.navigateByUrl('/listen-confirm');
     }
