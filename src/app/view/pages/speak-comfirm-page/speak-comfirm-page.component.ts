@@ -3,6 +3,7 @@ import { SessionService } from 'src/app/controller/session/session.service';
 import { Howl } from 'howler';
 import CLASSES from 'src/app/config/classes';
 import { RecordService } from 'src/app/controller/record/record.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-speak-comfirm-page',
@@ -14,7 +15,8 @@ export class SpeakComfirmPageComponent {
 
   constructor(
     public recordService: RecordService,
-    private sessionService: SessionService
+    private sessionService: SessionService,
+    private router: Router
   ) { }
 
   public playback(id: number): void {
@@ -35,6 +37,10 @@ export class SpeakComfirmPageComponent {
   }
 
   public submitRecordings(): void {
-    this.sessionService.submitSessionRecordings();
+    this.sessionService.submitSessionRecordings().then((result) => {
+      this.router.navigateByUrl('/thank');
+    }, (error) => {
+      console.log("Cannot submit recordings! " + error);
+    });
   }
 }

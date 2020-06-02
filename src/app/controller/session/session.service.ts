@@ -37,14 +37,14 @@ export class SessionService {
     return this.sessionRecordingUrls[id];
   }
 
-  public submitSessionRecordings(): void {
+  public submitSessionRecordings(): Promise<any> {
     let formData = new FormData();
     for (let i = 0; i < CLASSES.length; i++) {
       let file = new File([this.sessionRecordings[i]], CLASSES[i] + '.wav', { type: 'video/webm' });
       formData.append(CLASSES[i], file, CLASSES[i] + '.wav');
     }
-    formData.append('uuid', this.getUuid());
-    this.http.post('/api/speak-submit', formData).subscribe();
+    formData.append('authorId', this.getUuid());
+    return this.http.post<any>('/api/speak-submit', formData).toPromise();
   }
 
   public fetchValidationRequests(): Promise<void> {
