@@ -7,8 +7,6 @@ button {
     color: #ef5350 !important;
   }
 
-  &:focus,
-  &:active,
   &:hover {
     background-color: #ef5350 !important;
     span {
@@ -21,9 +19,7 @@ button {
   span {
     color: #4caf50 !important;
   }
-
-  &:focus,
-  &:active,
+  
   &:hover {
     background-color: #4caf50 !important;
     span {

@@ -26,7 +26,6 @@ button {
   }
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
 
-  &:focus,
   &:hover {
     background-color: white !important;
     outline: none !important;
@@ -37,7 +36,6 @@ button {
   }
 
   &:disabled,
-  &:disabled:active,
   &:disabled:hover {
     background-color: #333333 !important;
     outline: none !important;
