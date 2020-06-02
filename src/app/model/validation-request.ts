@@ -1,9 +1,9 @@
 class ValidationRequest {
     public data: string = null;
-    public validation: boolean = null;
+    public result: boolean = null;
 
     constructor(
-        public readonly recordId: string,
+        public readonly validationId: string,
         public readonly label: string
     ) {}
 }

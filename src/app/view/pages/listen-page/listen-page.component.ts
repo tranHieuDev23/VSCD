@@ -39,7 +39,7 @@ export class ListenPageComponent implements OnInit {
   }
 
   public async validate(validation: boolean) {
-    this.currentRequest.validation = validation;
+    this.currentRequest.result = validation;
     if (this.currentRequestId < this.requestsCount) {
       this.currentRequestId ++;
       this.currentRequest = await this.sessionService.getValidationRequest(this.currentRequestId - 1);

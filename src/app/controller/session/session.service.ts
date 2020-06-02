@@ -49,13 +49,19 @@ export class SessionService {
 
   public fetchValidationRequests(): Promise<void> {
     return new Promise((resolve, reject) => {
-      this.sessionValidationRequests = [
-        new ValidationRequest("0", "Không"),
-        new ValidationRequest("1", "Một"),
-        new ValidationRequest("2", "Hai"),
-        new ValidationRequest("3", "Ba"),
-      ];
-      resolve();
+      const requestData = {
+        'userId': this.getUuid()
+      };
+      this.http.post<any>('/api/get-validation-requests', requestData).toPromise().then((result) => {
+        let validationRequests: ValidationRequest[] = [];
+        for (let i = 0; i < result.length; i++) {
+          let validationId = result[i].validationId;
+          let label = result[i].label;
+          validationRequests.push(new ValidationRequest(validationId, label));
+        }
+        this.sessionValidationRequests = validationRequests;
+        resolve();
+      }, reject);
     });
   }
 
@@ -64,7 +70,7 @@ export class SessionService {
   }
 
   public setValidation(id: number, validation: boolean): void {
-    this.sessionValidationRequests[id].validation = validation;
+    this.sessionValidationRequests[id].result = validation;
   }
 
   public getValidationRequest(id: number): Promise<ValidationRequest> {
@@ -72,8 +78,15 @@ export class SessionService {
       if (this.sessionValidationRequests[id].data) {
         return resolve(this.sessionValidationRequests[id]);
       }
-      this.sessionValidationRequests[id].data = "/#";
-      return resolve(this.sessionValidationRequests[id]);
+      const requestData = {
+        'validationId': this.sessionValidationRequests[id].validationId
+      };
+      this.http.post('/api/get-validation-audio', requestData, {
+        responseType: 'blob'
+      }).toPromise().then((result) => {
+        this.sessionValidationRequests[id].data = URL.createObjectURL(result);
+        return resolve(this.sessionValidationRequests[id]);
+      }, reject);
     });
   }
 
@@ -81,7 +94,14 @@ export class SessionService {
     return this.sessionValidationRequests;
   }
 
-  public submitValidations(): void {
-    console.log(this.sessionValidationRequests);
+  public submitValidations(): Promise<void> {
+    const requestData = [];
+    for (let i = 0; i < this.sessionValidationRequests.length; i++) {
+      requestData.push({
+        'validationId': this.sessionValidationRequests[i].validationId,
+        'result': this.sessionValidationRequests[i].result
+      });
+    }
+    return this.http.post<void>('/api/validation-submit', requestData).toPromise();
   }
 }

@@ -34,10 +34,14 @@ export class ListenComfirmPageComponent implements OnInit {
   }
 
   public changeValidation(id: number): void {
-    this.validationRequests[id].validation = !this.validationRequests[id].validation;
+    this.validationRequests[id].result = !this.validationRequests[id].result;
   }
 
   public submitValidations(): void {
-    this.sessionService.submitValidations();
+    this.sessionService.submitValidations().then((result) => {
+      this.router.navigateByUrl("/thank");
+    }, (error) => {
+      console.log(error);
+    });
   }
 }
