@@ -30,7 +30,7 @@
 
         <div class="col-md-6 d-flex flex-column justify-content-center py-4">
             <button type="button" class="btn btn-primary rounded-circle shadow m-2 mx-auto" (click)="playback()"
-                style="width: 4rem; height: 4rem;">
+                [disabled]="!isRecordingPlayable" style="width: 4rem; height: 4rem;">
                 <i class="fas fa-play"></i>
             </button>
             <div class="mx-auto">

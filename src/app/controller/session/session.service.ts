@@ -80,19 +80,20 @@ export class SessionService {
     this.sessionValidationRequests[id].result = validation;
   }
 
-  public getValidationRequest(id: number): Promise<ValidationRequest> {
-    return new Promise<ValidationRequest>((resolve, reject) => {
-      if (this.sessionValidationRequests[id].data) {
-        return resolve(this.sessionValidationRequests[id]);
-      }
+  public getValidationRequest(id: number): ValidationRequest {
+    return this.sessionValidationRequests[id];
+  }
+
+  public fetchValidationAudio(request: ValidationRequest): Promise<ValidationRequest> {
+    return new Promise((resolve, reject) => {
       const requestData = {
-        'validationId': this.sessionValidationRequests[id].validationId
+        'validationId': request.validationId
       };
       this.http.post(this.apiUrl + '/api/get-validation-audio', requestData, {
         responseType: 'blob'
       }).toPromise().then((result) => {
-        this.sessionValidationRequests[id].data = URL.createObjectURL(result);
-        return resolve(this.sessionValidationRequests[id]);
+        request.data = URL.createObjectURL(result);
+        resolve(request);
       }, reject);
     });
   }

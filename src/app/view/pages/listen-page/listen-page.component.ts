@@ -13,9 +13,10 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class ListenPageComponent implements OnInit {
   public requestsCount: number;
 
-  public currentRequestId: number = 1;
+  public currentRequestId: number;
   public currentRequest: ValidationRequest;
-  public isRecordingPlayed: boolean = false;
+  public isRecordingPlayable: boolean;
+  public isRecordingPlayed: boolean;
   public errorMessage: string;
 
   constructor(
@@ -38,10 +39,13 @@ export class ListenPageComponent implements OnInit {
 
   private init(requestId: number): void {
     this.currentRequestId = requestId;
+    this.currentRequest = this.sessionService.getValidationRequest(requestId - 1);
+    this.isRecordingPlayable = false;
     this.isRecordingPlayed = false;
     this.errorMessage = null;
-    this.sessionService.getValidationRequest(requestId - 1).then((result) => {
+    this.sessionService.fetchValidationAudio(this.currentRequest).then((result) => {
       this.currentRequest = result;
+      this.isRecordingPlayable = true;
     }, (error) => {
       if (error instanceof HttpErrorResponse) {
         this.errorMessage = error.message;
