@@ -1,10 +1,10 @@
 button {
-  background-color: white;
+  background-color: white !important;
 }
 
 #speak {
   span {
-    color: #ef5350;
+    color: #ef5350 !important;
   }
 
   &:focus,
@@ -19,7 +19,7 @@ button {
 
 #listen {
   span {
-    color: #4caf50;
+    color: #4caf50 !important;
   }
 
   &:focus,

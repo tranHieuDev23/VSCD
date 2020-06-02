@@ -20,13 +20,17 @@ a:hover {
 
 button {
   border: none !important;
+  background-color: #9c100f !important;
+  span {
+    color: white !important;
+  }
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
 
   &:focus,
-  &:active,
   &:hover {
     background-color: white !important;
     outline: none !important;
-    box-shadow: none !important;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
     span {
       color: #9c100f !important;
     }
