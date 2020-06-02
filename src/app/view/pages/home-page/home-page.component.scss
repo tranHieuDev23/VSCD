@@ -3,28 +3,30 @@ button {
 }
 
 #speak {
-  i {
+  span {
     color: #ef5350;
   }
 
   &:focus,
+  &:active,
   &:hover {
     background-color: #ef5350 !important;
-    i {
+    span {
       color: white !important;
     }
   }
 }
 
 #listen {
-  i {
+  span {
     color: #4caf50;
   }
 
   &:focus,
+  &:active,
   &:hover {
     background-color: #4caf50 !important;
-    i {
+    span {
       color: white !important;
     }
   }

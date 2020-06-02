@@ -1,39 +1,39 @@
 <div class="container-fluid header">
     <nav class="nav py-2 py-md-3">
         <app-back-button></app-back-button>
-        <span class="nav-link">
+        <span class="nav-link primary-font">
             Ghi âm
         </span>
     </nav>
 </div>
 
 <div class="container my-4">
-    <p>Phát âm các từ sau một cách rõ ràng. Quá trình ghi âm sẽ diễn ra trong 2 giây.</p>
+    <p class="primary-font">Phát âm các từ sau một cách rõ ràng. Quá trình ghi âm sẽ diễn ra trong 2 giây.</p>
     <div class="row">
         <div class="col-md-6 d-flex flex-column justify-content-center">
             <div class="card text-center w-100">
                 <div class="card-body d-flex flex-column" id="word-card">
                     <div class="my-auto">
-                        <h2 class="card-title">{{ currentClassLabel }}</h2>
-                        <p class="card-text">{{ currentClassId }}/{{ classCount }}</p>
+                        <h2 class="card-title primary-font">{{ currentClassLabel }}</h2>
+                        <p class="card-text primary-font">{{ currentClassId }}/{{ classCount }}</p>
                     </div>
                 </div>
             </div>
-            <h4 class="mx-auto mt-4" style="font-family: monospace;">00:0{{ currentTime }}</h4>
+            <h4 class="mx-auto mt-4 mt-md-3 secondary-font">00:0{{ currentTime }}</h4>
         </div>
         <div class="col-md-6 d-flex flex-column justify-content-center py-3">
             <button type="button" class="btn btn-primary rounded-circle shadow m-2 mx-auto" style="width: 4rem; height: 4rem;" [disabled]="recordService.getIsRecording()" (click)="startRecording()">
-                <i class="fas fa-microphone"></i>
+                <span class="fas fa-microphone"></span>
             </button>
             <div class="mx-auto">
                 <button type="button" class="btn btn-primary rounded-circle shadow m-2" style="width: 4rem; height: 4rem;" [disabled]="!currentRecording" (click)="playback()">
-                    <i class="fas fa-play"></i>
+                    <span class="fas fa-play"></span>
                 </button>
                 <button type="button" class="btn btn-primary rounded-circle shadow m-2" style="width: 4rem; height: 4rem;" [disabled]="!currentRecording" (click)="next()">
-                    <i class="fas fa-check"></i>
+                    <span class="fas fa-check"></span>
                 </button>
             </div>
-            <div *ngIf="errorMessage" class="alert alert alert-danger mt-5 mt-md-4">
+            <div *ngIf="errorMessage" class="alert alert alert-danger mt-5 mt-md-4 primary-font">
                 Có lỗi xảy ra trong quá trình ghi âm: {{ errorMessage }}
             </div>
         </div>

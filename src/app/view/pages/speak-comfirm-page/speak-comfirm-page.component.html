@@ -1,38 +1,38 @@
 <div class="container-fluid header">
     <nav class="nav py-2 py-md-3">
         <app-back-button></app-back-button>
-        <span class="nav-link">
+        <span class="nav-link primary-font">
             Xác nhận các bản ghi âm
         </span>
     </nav>
 </div>
 
 <div class="container my-4">
-    <p>Nghe lại các đoạn ghi âm và ghi âm lại nếu cần thiết.</p>
+    <p class="primary-font">Nghe lại các đoạn ghi âm và ghi âm lại nếu cần thiết.</p>
     <div class="row">
         <div *ngFor="let item of classLabels; let i = index" class="col-md-6 px-4 py-2">
             <div class="d-flex justify-content-between align-items-center mx-auto p-2 border">
-                <p class="my-auto">{{ item }}</p>
+                <p class="my-auto primary-font">{{ item }}</p>
                 <div>
                     <button type="button" class="btn btn-primary rounded-circle m-2"
                         style="width: 2.5rem; height: 2.5rem;" [disabled]="recordService.getIsRecording()"
                         (click)="playback(i)">
-                        <i class="fas fa-play"></i>
+                        <span class="fas fa-play"></span>
                     </button>
                     <button type="button" class="btn btn-primary rounded-circle m-2"
                         style="width: 2.5rem; height: 2.5rem;" [disabled]="recordService.getIsRecording()"
                         (click)="recordAgain(i)">
-                        <i class="fas fa-redo"></i>
+                        <span class="fas fa-redo"></span>
                     </button>
                 </div>
             </div>
         </div>
 
         <div class="col-12 d-flex flex-column">
-            <div *ngIf="errorMessage" class="alert alert alert-danger mt-4 mt-md-4">
+            <div *ngIf="errorMessage" class="alert alert alert-danger mt-4 mt-md-4 primary-font">
                 Có lỗi xảy ra trong quá trình gửi các đoạn ghi âm: {{ errorMessage }}
             </div>
-            <button type="button" class="btn btn-lg btn-primary mt-4 mx-auto d-block" (click)="submitRecordings()">
+            <button type="button" class="btn btn-lg btn-primary mt-4 mx-auto d-block primary-font" (click)="submitRecordings()">
                 Gửi các bản ghi âm
             </button>
         </div>

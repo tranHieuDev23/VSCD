@@ -10,6 +10,7 @@
 @import "~bootstrap/scss/_card.scss";
 @import "~bootstrap/scss/_alert.scss";
 @import "~@fortawesome/fontawesome-free/css/all.min.css";
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&family=Open+Sans:wght@300;400&display=swap');
 
 a,
 a:focus,
@@ -21,17 +22,23 @@ button {
   border: none !important;
 
   &:focus,
+  &:active,
   &:hover {
     background-color: white !important;
-    i {
+    outline: none !important;
+    box-shadow: none !important;
+    span {
       color: #9c100f !important;
     }
   }
 
   &:disabled,
+  &:disabled:active,
   &:disabled:hover {
     background-color: #333333 !important;
-    i {
+    outline: none !important;
+    box-shadow: none !important;
+    span {
       color: white !important;
     }
   }
@@ -44,4 +51,12 @@ button {
   a {
     color: white;
   }
+}
+
+.primary-font {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.secondary-font {
+  font-family: 'Roboto Mono', monospace;
 }
