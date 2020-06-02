@@ -60,7 +60,7 @@ export class SpeakPageComponent {
     sound.play();
   }
 
-  private startTimer(duration: number): NodeJS.Timeout {
+  private startTimer(duration: number): any {
     this.currentTime = 0;
     return setInterval(() => {
       if (this.currentTime < duration) {
