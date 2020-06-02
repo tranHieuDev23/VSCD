@@ -3,11 +3,13 @@ import * as hyperid from 'hyperid';
 import CLASSES from 'src/app/config/classes';
 import ValidationRequest from 'src/app/model/validation-request';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SessionService {
+  private apiUrl: string;
   private uuid: string;
   private sessionRecordings: any[] = [];
   private sessionRecordingUrls: string[] = [];
@@ -16,6 +18,7 @@ export class SessionService {
   constructor(
     private http: HttpClient
   ) {
+    this.apiUrl = environment.apiUrl;
     this.uuid = hyperid().uuid;
     this.resetSessionRecordings();
   }
@@ -48,7 +51,7 @@ export class SessionService {
       formData.append(CLASSES[i], file, CLASSES[i] + '.wav');
     }
     formData.append('authorId', this.getUuid());
-    return this.http.post<any>('/api/speak-submit', formData).toPromise();
+    return this.http.post<any>(this.apiUrl + '/api/speak-submit', formData).toPromise();
   }
 
   public fetchValidationRequests(): Promise<void> {
@@ -56,7 +59,7 @@ export class SessionService {
       const requestData = {
         'userId': this.getUuid()
       };
-      this.http.post<any>('/api/get-validation-requests', requestData).toPromise().then((result) => {
+      this.http.post<any>(this.apiUrl + '/api/get-validation-requests', requestData).toPromise().then((result) => {
         let validationRequests: ValidationRequest[] = [];
         for (let i = 0; i < result.length; i++) {
           let validationId = result[i].validationId;
@@ -85,7 +88,7 @@ export class SessionService {
       const requestData = {
         'validationId': this.sessionValidationRequests[id].validationId
       };
-      this.http.post('/api/get-validation-audio', requestData, {
+      this.http.post(this.apiUrl + '/api/get-validation-audio', requestData, {
         responseType: 'blob'
       }).toPromise().then((result) => {
         this.sessionValidationRequests[id].data = URL.createObjectURL(result);
@@ -106,6 +109,6 @@ export class SessionService {
         'result': this.sessionValidationRequests[i].result
       });
     }
-    return this.http.post<void>('/api/validation-submit', requestData).toPromise();
+    return this.http.post<void>(this.apiUrl + '/api/validation-submit', requestData).toPromise();
   }
 }
