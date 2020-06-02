@@ -3,19 +3,19 @@ const CLASSES: string[] = [
     "Một",
     "Hai",
     "Ba",
-    // "Bốn",
-    // "Năm",
-    // "Sáu",
-    // "Bảy",
-    // "Tám",
-    // "Chín",
-    // "Trái",
-    // "Phải",
-    // "Lên",
-    // "Xuống",
-    // "Tiến",
-    // "Lùi",
-    // "Có"
+    "Bốn",
+    "Năm",
+    "Sáu",
+    "Bảy",
+    "Tám",
+    "Chín",
+    "Trái",
+    "Phải",
+    "Lên",
+    "Xuống",
+    "Tiến",
+    "Lùi",
+    "Có"
 ];
 
 export default CLASSES;
