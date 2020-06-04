@@ -1,16 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RecordService } from 'src/app/controller/record/record.service';
 import { Howl } from 'howler';
 import { SessionService } from 'src/app/controller/session/session.service';
 import CLASSES from 'src/app/config/classes';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+
+const MSSV_REGEX = /^20\d{6}$/;
 
 @Component({
   selector: 'app-speak-page',
   templateUrl: './speak-page.component.html',
   styleUrls: ['./speak-page.component.scss']
 })
-export class SpeakPageComponent {
+export class SpeakPageComponent implements OnInit {
   public classCount: number = CLASSES.length;
 
   public currentClassId: number;
@@ -23,7 +25,8 @@ export class SpeakPageComponent {
   constructor(
     public recordService: RecordService,
     private sessionService: SessionService,
-    private router: Router
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) {
     this.init(1);
     this.sessionService.resetSessionRecordings();
@@ -36,6 +39,18 @@ export class SpeakPageComponent {
     this.currentRecordingUrl = null;
     this.currentTime = 0;
     this.errorMessage = null;
+  }
+
+  ngOnInit(): void {
+    this.activatedRoute.queryParams.subscribe(params => {
+      const mssv = params['mssv'];
+      if (mssv) {
+        if (MSSV_REGEX.test(mssv)) {
+          console.log('Good')
+          this.sessionService.setMssvOnce(mssv);
+        }
+      }
+    });
   }
 
   public startRecording(): void {

@@ -11,6 +11,8 @@ import { environment } from 'src/environments/environment';
 export class SessionService {
   private apiUrl: string;
   private uuid: string;
+  private mssv: string = null;
+  private mssvWasSet: boolean = false;
   private sessionRecordings: any[] = [];
   private sessionRecordingUrls: string[] = [];
   private sessionValidationRequests: ValidationRequest[] = [];
@@ -25,6 +27,22 @@ export class SessionService {
 
   public getUuid(): string {
     return this.uuid;
+  }
+
+  public setMssvOnce(mssv: string): void {
+    if (this.mssvWasSet) {
+      return;
+    }
+    this.mssv = mssv;
+    this.mssvWasSet = true;
+  }
+
+  public getMssv(): string {
+    return this.mssv;
+  }
+
+  public clearMssv(): void {
+    this.mssv = null;
   }
 
   public resetSessionRecordings(): void {
@@ -51,6 +69,9 @@ export class SessionService {
       formData.append(CLASSES[i], file, CLASSES[i] + '.wav');
     }
     formData.append('authorId', this.getUuid());
+    if (this.mssv) {
+      formData.append('mssv', this.mssv);
+    }
     return this.http.post<any>(this.apiUrl + '/api/speak-submit', formData).toPromise();
   }
 
