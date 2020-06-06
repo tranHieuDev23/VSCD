@@ -13,6 +13,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class SpeakComfirmPageComponent implements OnInit {
   public classLabels: string[] = CLASSES;
+  public isSubmitting: boolean = false;
   public errorMessage: string;
 
   constructor(
@@ -49,10 +50,13 @@ export class SpeakComfirmPageComponent implements OnInit {
   }
 
   public submitRecordings(): void {
+    this.isSubmitting = true;
     this.sessionService.submitSessionRecordings().then((result) => {
+      this.isSubmitting = false;
       this.sessionService.resetSessionRecordings();
       this.router.navigateByUrl('/thank');
     }, (error) => {
+      this.isSubmitting = false;
       if (error instanceof HttpErrorResponse) {
         this.errorMessage = error.message;
       } else {

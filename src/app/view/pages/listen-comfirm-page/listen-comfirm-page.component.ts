@@ -12,6 +12,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class ListenComfirmPageComponent implements OnInit {
   public validationRequests: ValidationRequest[] = [];
+  public isSubmitting: boolean = false;
   public errorMessage: string = null;
 
   constructor(
@@ -40,11 +41,14 @@ export class ListenComfirmPageComponent implements OnInit {
   }
 
   public submitValidations(): void {
+    this.isSubmitting = true;
     this.sessionService.submitValidations().then((result) => {
+      this.isSubmitting = false;
       this.sessionService.resetSessionValidationRequests();
       this.errorMessage = null;
       this.router.navigateByUrl("/thank");
     }, (error) => {
+      this.isSubmitting = false;
       if (error instanceof HttpErrorResponse) {
         this.errorMessage = error.message;
       } else {

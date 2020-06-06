@@ -34,7 +34,7 @@
             <div *ngIf="errorMessage" class="alert alert alert-danger mt-4 mt-md-4 primary-font">
                 Có lỗi xảy ra trong quá trình gửi các kết quả xác nhận: {{ errorMessage }}
             </div>
-            <button type="button" class="btn btn-lg btn-primary mt-4 mx-auto d-block primary-font border" (click)="submitValidations()">
+            <button [disabled]="isSubmitting" type="button" class="btn btn-lg btn-primary mt-4 mx-auto d-block primary-font border" (click)="submitValidations()">
                 <span>Gửi kết quả xác nhận</span>
             </button>
         </div>
