@@ -21,6 +21,7 @@ export class SpeakPageComponent implements OnInit {
   public currentRecordingUrl: string;
   public currentTime: number;
   public errorMessage: string;
+  public currentMssv: string;
 
   constructor(
     public recordService: RecordService,
@@ -47,7 +48,7 @@ export class SpeakPageComponent implements OnInit {
       const mssvCode = params['code'];
       if (mssv && mssvCode) {
         if (MSSV_REGEX.test(mssv)) {
-          console.log('Good')
+          this.currentMssv = mssv;
           this.sessionService.setMssvOnce(mssv, mssvCode);
         }
       }
