@@ -44,10 +44,11 @@ export class SpeakPageComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe(params => {
       const mssv = params['mssv'];
-      if (mssv) {
+      const mssvCode = params['code'];
+      if (mssv && mssvCode) {
         if (MSSV_REGEX.test(mssv)) {
           console.log('Good')
-          this.sessionService.setMssvOnce(mssv);
+          this.sessionService.setMssvOnce(mssv, mssvCode);
         }
       }
     });
