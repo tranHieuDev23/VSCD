@@ -5,8 +5,6 @@ import { SessionService } from 'src/app/controller/session/session.service';
 import CLASSES from 'src/app/config/classes';
 import { Router, ActivatedRoute } from '@angular/router';
 
-const MSSV_REGEX = /^20\d{6}$/;
-
 @Component({
   selector: 'app-speak-page',
   templateUrl: './speak-page.component.html',
@@ -21,7 +19,6 @@ export class SpeakPageComponent implements OnInit {
   public currentRecordingUrl: string;
   public currentTime: number;
   public errorMessage: string;
-  public currentMssv: string;
 
   constructor(
     public recordService: RecordService,
@@ -44,13 +41,9 @@ export class SpeakPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe(params => {
-      const mssv = params['mssv'];
-      const mssvCode = params['code'];
-      if (mssv && mssvCode) {
-        if (MSSV_REGEX.test(mssv)) {
-          this.currentMssv = mssv;
-          this.sessionService.setMssvOnce(mssv, mssvCode);
-        }
+      const mssvNcode = params['mssvNcode'];
+      if (mssvNcode) {
+        this.sessionService.setMssvOnce(mssvNcode);
       }
     });
   }
@@ -81,7 +74,7 @@ export class SpeakPageComponent implements OnInit {
     this.currentTime = 0;
     return setInterval(() => {
       if (this.currentTime < duration) {
-        this.currentTime ++;
+        this.currentTime++;
       }
     }, 1000);
   }

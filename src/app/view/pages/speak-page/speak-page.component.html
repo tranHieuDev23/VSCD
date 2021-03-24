@@ -8,8 +8,8 @@
 </div>
 
 <div class="container my-4">
-    <p *ngIf="currentMssv" class="primary-font">Sinh viên đang điểm danh: {{ currentMssv }}</p>
-    <p class="primary-font">Phát âm các từ sau một cách rõ ràng. Quá trình ghi âm sẽ diễn ra trong 2 giây. Chú ý ghi âm trong môi trường yên tĩnh, không tiếng ồn.</p>
+    <p class="primary-font">Phát âm các từ sau một cách rõ ràng. Quá trình ghi âm sẽ diễn ra trong 2 giây. Chú ý ghi âm
+        trong môi trường yên tĩnh, không tiếng ồn.</p>
     <div class="row">
         <div class="col-md-6 d-flex flex-column justify-content-center">
             <div class="card text-center w-100">
@@ -23,14 +23,18 @@
             <h4 class="mx-auto mt-4 mt-md-3 secondary-font">00:0{{ currentTime }}</h4>
         </div>
         <div class="col-md-6 d-flex flex-column justify-content-center py-3">
-            <button type="button" class="btn btn-primary rounded-circle shadow m-2 mx-auto" style="width: 4rem; height: 4rem;" [disabled]="recordService.getIsRecording()" (click)="startRecording()">
+            <button type="button" class="btn btn-primary rounded-circle shadow m-2 mx-auto"
+                style="width: 4rem; height: 4rem;" [disabled]="recordService.getIsRecording()"
+                (click)="startRecording()">
                 <span class="fas fa-microphone"></span>
             </button>
             <div class="mx-auto">
-                <button type="button" class="btn btn-primary rounded-circle shadow m-2" style="width: 4rem; height: 4rem;" [disabled]="!currentRecording" (click)="playback()">
+                <button type="button" class="btn btn-primary rounded-circle shadow m-2"
+                    style="width: 4rem; height: 4rem;" [disabled]="!currentRecording" (click)="playback()">
                     <span class="fas fa-play"></span>
                 </button>
-                <button type="button" class="btn btn-primary rounded-circle shadow m-2" style="width: 4rem; height: 4rem;" [disabled]="!currentRecording" (click)="next()">
+                <button type="button" class="btn btn-primary rounded-circle shadow m-2"
+                    style="width: 4rem; height: 4rem;" [disabled]="!currentRecording" (click)="next()">
                     <span class="fas fa-check"></span>
                 </button>
             </div>

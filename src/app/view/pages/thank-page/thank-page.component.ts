@@ -7,16 +7,20 @@ import { SessionService } from 'src/app/controller/session/session.service';
   styleUrls: ['./thank-page.component.scss']
 })
 export class ThankPageComponent implements OnInit {
-  public mssv: string;
+  public isRedirecting: boolean = false;
 
   constructor(
     private sessionService: SessionService
   ) {
-    this.mssv = sessionService.getMssv();
-    sessionService.clearMssv();
   }
 
   ngOnInit(): void {
+    if (this.sessionService.getMssvNcode()) {
+      this.isRedirecting = true;
+      setTimeout(() => {
+        window.location.href = 'https://attendance.pitec.vn/';
+      }, 3000);
+    }
   }
 
 }
