@@ -8,6 +8,11 @@
 </div>
 
 <div class="container my-4">
+    <div *ngIf="!isBrowserService.isChrome && !isBrowserService.isFirefox" class="alert alert-danger primary-font"
+        role="alert">
+        Trang web được thiết kế cho hai trình duyệt Chrome và Firefox. Bạn nên chuyển sang sử dụng một trong hai trình
+        duyệt này thay thế.
+    </div>
     <p class="primary-font">Hướng dẫn sử dụng</p>
     <ol class="primary-font">
         <li>Ấn <span class="fas fa-microphone"></span> để bắt đầu ghi âm. Chú ý cấp quyền sử dụng microphone cho

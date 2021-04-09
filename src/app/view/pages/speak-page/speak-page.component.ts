@@ -4,6 +4,7 @@ import { Howl } from 'howler';
 import { SessionService } from 'src/app/controller/session/session.service';
 import CLASSES from 'src/app/config/classes';
 import { Router, ActivatedRoute } from '@angular/router';
+import { IsBrowserService } from 'src/app/controller/is-browser/is-browser.service';
 
 @Component({
   selector: 'app-speak-page',
@@ -22,6 +23,7 @@ export class SpeakPageComponent implements OnInit {
 
   constructor(
     public recordService: RecordService,
+    public isBrowserService: IsBrowserService,
     private sessionService: SessionService,
     private router: Router,
     private activatedRoute: ActivatedRoute
